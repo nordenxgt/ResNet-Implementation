@@ -6,9 +6,7 @@ def main():
     resnets = ["resnet18", "resnet34", "resnet50", "resnet101", "resnet152"]
     for resnet in resnets:
         model = get_model(resnet)
-        print("=" * 90)
         print(resnet)
-        print("=" * 90)
         summary(model, input_size=[1, 3, 224, 224])
         print("\n\n")
 

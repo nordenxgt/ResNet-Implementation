@@ -8,9 +8,9 @@ def ResNet152(): return ResNet(152)
 
 def get_model(resnet: str):
     resnets = {
-        "resnet18": ResNet34,
-        "resnet34": ResNet50,
-        "resnet50": ResNet18,
+        "resnet18": ResNet18,
+        "resnet34": ResNet34,
+        "resnet50": ResNet50,
         "resnet101": ResNet101,
         "resnet152": ResNet152
     }
