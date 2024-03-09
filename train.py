@@ -30,8 +30,8 @@ def main(epochs: int, num_layers: int, num_classes: int):
         model.train()
         for X, y in train_dataloader:
             X, y = X.to(device), y.to(device)
-            y_pred, y_aux4d, y_aux4a = model(X)
-            loss = loss_fn(y_pred, y) + loss_fn(y_aux4d, y)*0.3 + loss_fn(y_aux4a, y)*0.3
+            y_pred = model(X)
+            loss = loss_fn(y_pred, y)
             train_loss += loss.item()
             train_acc += calculate_accuracy(F.softmax(y_pred, dim=1), y)
             optimizer.zero_grad()
@@ -44,8 +44,8 @@ def main(epochs: int, num_layers: int, num_classes: int):
             with torch.inference_mode():
                 for X, y in test_dataloader:
                     X, y = X.to(device), y.to(device)
-                    y_pred, y_aux4d, y_aux4a = model(X)
-                    loss = loss_fn(y_pred, y) + loss_fn(y_aux4d, y)*0.3 + loss_fn(y_aux4a, y)*0.3
+                    y_pred = model(X)
+                    loss = loss_fn(y_pred, y)
                     test_acc += calculate_accuracy(F.softmax(y_pred, dim=1), y)
                     test_loss += loss.item()
             
