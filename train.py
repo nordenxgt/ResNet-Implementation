@@ -11,7 +11,7 @@ from dataloader import dataloader
 from utils import plot_loss_accuracy, calculate_accuracy
 
 def main(epochs: int, num_layers: int, num_classes: int):
-    model = ResNet(num_layers)
+    model = ResNet(num_layers, num_classes)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     lr = 0.1
@@ -67,6 +67,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Train Script")
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--num_layers", type=int, default=34)
-    parser.add_argument("--num_classes", type=int, default=34)
+    parser.add_argument("--num_classes", type=int, default=1000)
     args = parser.parse_args()
     main(args.epochs, args.num_layers, args.num_classes)
