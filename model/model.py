@@ -5,14 +5,7 @@ from torch import nn
 import torch.nn.functional as F
 
 class Conv(nn.Module):
-    def __init__(
-        self, 
-        in_channels: int,
-        out_channels: int, 
-        kernel_size: int = 1, 
-        stride: int = 1, 
-        padding: int = 0
-    ) -> None:
+    def __init__(self, in_channels: int, out_channels: int, kernel_size: int = 1, stride: int = 1, padding: int = 0) -> None:
         super().__init__()
         self.conv = nn.Sequential(
             nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding, bias=False), 
@@ -62,7 +55,7 @@ class BottleneckBlock(nn.Module):
 class ResNet(nn.Module):
     def __init__(self, num_layers: int, num_classes: int = 1000) -> None:
         super().__init__()
-        block_config = {
+        self.block_config = {
             18: {"Block": ResBlock, "num_blocks": [2, 2, 2, 2]},
             34: {"Block": ResBlock, "num_blocks": [3, 4, 6, 3]},
             50: {"Block": BottleneckBlock, "num_blocks": [3, 4, 6, 3]},
@@ -70,8 +63,8 @@ class ResNet(nn.Module):
             152: {"Block": BottleneckBlock, "num_blocks": [3, 8, 36, 3]}
         }
 
-        self.block = block_config[num_layers]["Block"]
-        self.num_blocks = block_config[num_layers]["num_blocks"]
+        self.block = self.block_config[num_layers]["Block"]
+        self.num_blocks = self.block_config[num_layers]["num_blocks"]
         self.channels = 64
 
         self.conv1 = Conv(3, self.channels, 7, 2, 3)
