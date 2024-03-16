@@ -16,8 +16,9 @@ def main(epochs: int, num_layers: int, num_classes: int):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     lr = 0.1
     optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9, weight_decay=0.0001)
+    scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, patience=10, factor=0.1)
     loss_fn = nn.CrossEntropyLoss()
-
+    
     train_dataloader, test_dataloader = dataloader()
 
     train_losses, train_accuracies = [], []
@@ -37,7 +38,8 @@ def main(epochs: int, num_layers: int, num_classes: int):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-        
+            scheduler.step()
+                
         if epoch % 10 == 0:
             test_loss, test_acc = 0, 0
             model.eval()
