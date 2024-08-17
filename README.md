@@ -32,3 +32,17 @@ Before running the script, place your data directory location for both train and
 ```sh
 python train.py --epochs 100 --num_layers 34 --num_classes 1000
 ```
+
+## Citation
+
+```
+@misc{he2015deepresiduallearningimage,
+      title={Deep Residual Learning for Image Recognition}, 
+      author={Kaiming He and Xiangyu Zhang and Shaoqing Ren and Jian Sun},
+      year={2015},
+      eprint={1512.03385},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/1512.03385}, 
+}
+```
